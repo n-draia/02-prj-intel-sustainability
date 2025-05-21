@@ -159,5 +159,23 @@
     <img src="img/intel-header-logo.svg" alt="Intel Logo" class="footer-logo" />
     <span>&copy; 2025 Intel Sustainability Timeline</span>
   </footer>
+
+  <script>
+      // Simple fade-in on scroll for timeline cards
+      document.addEventListener('DOMContentLoaded', function() {
+        function revealCards() {
+          var cards = document.querySelectorAll('section > div');
+          var windowHeight = window.innerHeight;
+          cards.forEach(function(card) {
+            var cardTop = card.getBoundingClientRect().top;
+            if (cardTop < windowHeight - 60) {
+              card.classList.add('visible');
+            }
+          });
+        }
+        window.addEventListener('scroll', revealCards);
+        revealCards(); // Run on load
+      });
+    </script>
 </body>
 </html>
