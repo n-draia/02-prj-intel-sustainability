@@ -14,7 +14,7 @@ body {
 header {
   background: #0a223f; /* Intel blue */
   color: #fff;
-  padding: 40px 0 20px 0;
+  padding: 40px 0 50px 0;
   text-align: center;
 }
 
@@ -24,7 +24,7 @@ header img {
 }
 
 header h1 {
-  margin: 10px 0 10px 0;
+  margin: 10px 0 24px 0; /* Increased bottom margin for more space below heading */
   font-size: 2em;
 }
 
@@ -32,6 +32,58 @@ header p {
   max-width: 500px;
   margin: 0 auto;
   font-size: 1.1em;
+}
+
+/* Navbar styles */
+nav {
+  background: #0a223f; /* Intel blue */
+  width: 100vw; /* Stretch background to edge */
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  padding: 10px 0;
+  border: 4px solid #0a223f;
+  box-sizing: border-box;
+}
+
+/* Inner navbar content wrapper to keep alignment */
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 900px;
+}
+
+.nav-logo {
+  width: 60px;
+  height: auto;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+nav ul li {
+  margin-left: 25px;
+}
+nav ul li:first-child {
+  margin-left: 0;
+}
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1em;
+  transition: color 0.2s;
+}
+nav a:hover {
+  color: #2e5caa; /* Lighter blue on hover */
 }
 
 /* Timeline container */
@@ -135,13 +187,87 @@ section p {
     transform: none;
   }
   section > div {
-    width: 90%;
+    width: 98%; /* Make cards almost full width on small screens */
     left: 0 !important;
-    margin: 30px 0 30px 30px;
+    margin: 30px 0 30px 8px;
+    padding: 16px 8px 16px 12px; /* Reduce padding for small screens */
+    min-width: 0;
+    box-sizing: border-box;
   }
   section > div::before {
     left: -30px !important;
     right: auto !important;
+  }
+  section img {
+    max-width: 100%;
+  }
+}
+
+/* Responsive navbar: stack items on small screens */
+@media (max-width: 600px) {
+  nav {
+    flex-direction: row; /* Keep navbar horizontal */
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10px;
+  }
+  .nav-logo {
+    margin-bottom: 0;
+  }
+  nav ul {
+    flex-direction: row; /* Keep nav items in a row */
+    width: auto;
+  }
+  nav ul li {
+    margin: 0 0 0 16px; /* Add left margin between items */
+  }
+  nav ul li:first-child {
+    margin-left: 0;
+  }
+  header h1 {
+    font-size: 1.3em;
+    margin: 10px 0 16px 0;
+  }
+  header p {
+    font-size: 0.98em;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  header img {
+    width: 70px;
+  }
+}
+
+/* Footer styles (matches navbar) */
+footer {
+  display: flex;
+  align-items: center;
+  background: #0a223f;
+  color: #fff;
+  padding: 15px 5%;
+  font-size: 1em;
+  margin-top: 40px;
+}
+.footer-logo {
+  width: 50px;
+  height: auto;
+  margin-right: 15px;
+}
+footer span {
+  flex: 1;
+}
+@media (max-width: 600px) {
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px;
+  }
+  .footer-logo {
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
+  footer span {
+    width: 100%;
   }
 }
 
