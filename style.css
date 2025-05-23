@@ -302,37 +302,40 @@ section > div:hover p {
 /* Responsive navbar: stack items on small screens */
 @media (max-width: 600px) {
   nav {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between; /* Space between logo and nav */
+    flex-direction: column; /* Stack navbar items vertically */
+    align-items: stretch;   /* Stretch to full width */
+    justify-content: flex-start;
     padding: 6px 10px;
   }
   .nav-inner {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between; /* Logo left, nav right */
+    flex-direction: column; /* Stack logo and nav vertically */
+    align-items: stretch;
+    justify-content: flex-start;
     width: 100%;
   }
   .nav-logo {
-    margin-bottom: 0;
     width: 40px;
-    margin-right: 0; /* No extra margin */
+    margin-bottom: 8px; /* Space below logo */
+    margin-right: 0;
+    align-self: flex-start; /* Logo on the left */
   }
   nav ul {
-    flex-direction: row;
-    width: auto;
-    margin-left: auto; /* Push nav to the right */
+    flex-direction: column; /* Stack nav links vertically */
+    width: 100%;
+    margin-left: 0;
+    padding-left: 0;
   }
   nav ul li {
-    margin: 0 0 0 10px;
+    margin: 0 0 8px 0; /* Space between nav items */
   }
-  nav ul li:first-child {
-    margin-left: 0;
+  nav ul li:last-child {
+    margin-bottom: 0;
   }
   nav a {
     font-size: 0.95em;
-    padding: 4px 6px;
+    padding: 8px 0 8px 4px; /* More padding for touch */
+    display: block;         /* Make links fill width */
+    width: 100%;
   }
   header h1 {
     font-size: 1.3em;
