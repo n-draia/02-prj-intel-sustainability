@@ -100,21 +100,13 @@ section {
   max-width: 900px;
   margin: 40px auto 20px auto;
   padding: 20px 0;
+  /* Use flexbox to align the timeline cards vertically by default */
+  display: flex;              /* Enable flexbox */
+  flex-direction: column;     /* Stack cards vertically */
+  align-items: center;        /* Center cards horizontally */
 }
 
-/* Vertical line in the center */
-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 4px;
-  height: 100%;
-  background: #b0c4de; /* Light blue line */
-  z-index: 0;
-  box-shadow: 0 0 18px 4px #b0c4de88; /* Soft blue glow */
-}
+
 
 /* Timeline card styles */
 section > div {
@@ -133,7 +125,9 @@ section > div {
   border-left: 6px solid #0a223f; /* Thin Intel blue accent bar on the left */
 }
 
-/* Alternate cards left and right */
+/* Remove alternating left/right styles for vertical timeline */
+/* (These two blocks are no longer needed) */
+/*
 section > div:nth-child(odd) {
   left: -1.2%;
   margin-right: 55%;
@@ -141,26 +135,19 @@ section > div:nth-child(odd) {
 section > div:nth-child(even) {
   left: 51.75%;
 }
+*/
 
-/* Add a circle for each event on the timeline */
-section > div::before {
-  content: '';
-  position: absolute;
-  top: 30px;
-  width: 20px;
-  height: 20px;
-  background: #0a223f;
-  border-radius: 50%;
-  border: 4px solid #fff;
-  box-shadow: 0 0 0 2px #b0c4de;
-  z-index: 2;
-}
+/* Remove alternating marker positions for vertical timeline */
+/*
 section > div:nth-child(odd)::before {
   right: -30px;
 }
 section > div:nth-child(even)::before {
   left: -30px;
 }
+*/
+
+
 
 /* Card hover effect */
 section > div:hover {
@@ -217,6 +204,9 @@ section > div:hover p {
     margin-right: auto;
     padding-left: 0;
     padding-right: 0;
+    display: flex; /* Use flex to center cards */
+    flex-direction: column; /* Stack cards vertically */
+    align-items: center;    /* Center cards horizontally */
   }
   section::before {
     left: 0;
@@ -225,14 +215,16 @@ section > div:hover p {
     background: #b0c4de;
   }
   section > div {
-    width: calc(100% - 40px); /* Increase right margin so cards don't touch the edge */
+    width: calc(100% - 40px);
     left: 0 !important;
     transform: none !important;
-    margin: 30px 24px 30px 32px; /* Increase right margin to 24px */
+    margin: 30px 24px 30px 32px;
     padding: 16px 8px 16px 16px;
     min-width: 0;
     box-sizing: border-box;
-    border-left: 6px solid #0a223f; /* Keep accent bar on mobile */
+    border-left: 6px solid #0a223f;
+    /* Center each card horizontally */
+    align-self: center;
   }
   section > div::before {
     left: -32px !important;
@@ -243,26 +235,104 @@ section > div:hover p {
   }
 }
 
+/* --- Horizontal Timeline for Large Screens --- */
+/* This makes the timeline horizontal on screens wider than 900px */
+@media (min-width: 900px) {
+  /* Make the timeline section a horizontal flex container */
+  section {
+    display: flex;
+    flex-direction: row; /* Arrange cards in a row */
+    align-items: flex-start;
+    justify-content: flex-start; /* Align cards to the left */
+    /* 3 cards x 220px + 4 gaps x 24px = 660 + 96 = 756px */
+    width: 850px; /* Set width so 3 cards and all gaps are fully visible */
+    max-width: 100vw;
+    padding: 60px 0 40px 0;
+    margin: 40px auto 20px auto;
+    overflow-x: auto; /* Allow scrolling for more cards */
+    min-height: 420px;
+    scroll-snap-type: x mandatory; /* Enable horizontal scroll snap */
+  }
+
+  /* Timeline cards: arrange in a row */
+  section > div {
+    width: 220px;      /* Each card is 220px wide */
+    min-width: 220px;
+    max-width: 220px;
+    margin: 0 12px;    /* 12px gap on each side, so 24px between cards */
+    padding: 18px 12px 18px 12px;
+    border-left: none; /* Remove vertical accent bar */
+    border-top: 6px solid #0a223f; /* Add horizontal accent bar */
+    border-radius: 20px;
+    top: 0;
+    left: 0 !important;
+    transform: translateY(80px); /* Keep fade-in animation */
+    /* Cards are now in a row, so no left/right alternation needed */
+    scroll-snap-align: start; /* Snap each card to the start when scrolling */
+  }
+
+  /* Remove left/right alternation for horizontal layout */
+  section > div:nth-child(odd),
+  section > div:nth-child(even) {
+    margin-right: 24px;
+    margin-left: 24px;
+  }
+
+  /* Place the circle marker above each card */
+  section > div::before {
+    left: 50%;
+    top: -34px;
+    right: auto;
+    width: 20px;
+    height: 20px;
+    margin-left: -10px;
+    border: 4px solid #fff;
+    box-shadow: 0 0 0 2px #b0c4de;
+  }
+
+  /* Remove right/left alternation for markers */
+  section > div:nth-child(odd)::before,
+  section > div:nth-child(even)::before {
+    left: 50%;
+    right: auto;
+    margin-left: -10px;
+  }
+}
+
 /* Responsive navbar: stack items on small screens */
 @media (max-width: 600px) {
   nav {
-    flex-direction: row; /* Keep navbar horizontal */
+    flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    padding: 10px 10px;
+    justify-content: space-between; /* Space between logo and nav */
+    padding: 6px 10px;
+  }
+  .nav-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; /* Logo left, nav right */
+    width: 100%;
   }
   .nav-logo {
     margin-bottom: 0;
+    width: 40px;
+    margin-right: 0; /* No extra margin */
   }
   nav ul {
-    flex-direction: row; /* Keep nav items in a row */
+    flex-direction: row;
     width: auto;
+    margin-left: auto; /* Push nav to the right */
   }
   nav ul li {
-    margin: 0 0 0 16px; /* Add left margin between items */
+    margin: 0 0 0 10px;
   }
   nav ul li:first-child {
     margin-left: 0;
+  }
+  nav a {
+    font-size: 0.95em;
+    padding: 4px 6px;
   }
   header h1 {
     font-size: 1.3em;
