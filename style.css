@@ -97,7 +97,7 @@ nav a:hover {
 section {
   position: relative;
   width: 90%;
-  max-width: 900px;
+  max-width: 910px;
   margin: 40px auto 20px auto;
   padding: 20px 0;
   /* Use flexbox to align the timeline cards vertically by default */
@@ -224,6 +224,13 @@ section > div:hover p {
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
+}
+
+/* Match the main content width for special sections */
+.content-width {
+  width: 90%;
+  max-width: 910px;
+  margin: 0 auto;
 }
 
 /* Responsive: stack cards on small screens */
@@ -427,4 +434,27 @@ body > p {
 section > div.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Fun Facts interactivity: smooth hover effect for each column */
+.content-width .col-md-4 {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.content-width .col-md-4:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(46,92,170,0.10), 0 2px 8px rgba(0,0,0,0.08);
+  background: #f8fbff;
+  border-radius: 16px;
+}
+
+/* Add a hover effect to the Learn More links in the fun facts section */
+.content-width .btn-link:hover,
+.content-width .btn-link:focus {
+  color: #0a223f; /* Darker blue on hover */
+  text-decoration: underline wavy; /* Wavy underline for emphasis */
+  background-color: #e6f0fa; /* Subtle background on hover */
+  border-radius: 4px;
+  outline: none;
+  transition: background 0.2s, color 0.2s;
 }
