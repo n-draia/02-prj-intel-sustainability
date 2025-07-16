@@ -1,0 +1,20 @@
+{
+  "name": "Intel Sustainability",
+  "short_name": "Intel Timeline",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2e5caa",
+  "icons": [
+    {
+      "src": "img/intel192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "img/intel512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
